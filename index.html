@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartPark — Intelligent Parking Slot Manager</title>
+  <meta name="description" content="A smart city parking slot management system using linear data structures, searching and sorting algorithms with real-time performance evaluation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      <span class="nav-icon">🅿</span>
+      <span class="nav-title">SmartPark</span>
+      <span class="nav-badge">v2.0</span>
+    </div>
+    <div class="nav-links">
+      <a href="#dashboard" class="nav-link active" id="nav-dashboard">Dashboard</a>
+      <a href="#algorithms" class="nav-link" id="nav-algorithms">Algorithms</a>
+      <a href="#analytics" class="nav-link" id="nav-analytics">Analytics</a>
+      <a href="#about" class="nav-link" id="nav-about">About</a>
+    </div>
+    <div class="nav-status">
+      <span class="pulse-dot"></span>
+      <span id="live-time">--:--:--</span>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════ HERO ═══════════════════════ -->
+  <header class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div class="hero-particles" id="hero-particles"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-chip">
+        <span class="chip-dot"></span>
+        Smart City Infrastructure · CO1 &amp; CO5
+      </div>
+      <h1 class="hero-title">
+        <span class="title-line">Smart</span>
+        <span class="title-line accent">Parking</span>
+        <span class="title-line">Manager</span>
+      </h1>
+      <p class="hero-desc">
+        Real-time slot tracking with <strong>Linear Data Structures</strong>.
+        Blazing-fast <strong>Search &amp; Sort Algorithms</strong> with live performance benchmarking.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat" id="hs-total">
+          <span class="hs-value" id="stat-total">20</span>
+          <span class="hs-label">Total Slots</span>
+        </div>
+        <div class="hero-stat" id="hs-free">
+          <span class="hs-value" id="stat-free">--</span>
+          <span class="hs-label">Available</span>
+        </div>
+        <div class="hero-stat" id="hs-occupied">
+          <span class="hs-value" id="stat-occupied">--</span>
+          <span class="hs-label">Occupied</span>
+        </div>
+        <div class="hero-stat" id="hs-rate">
+          <span class="hs-value" id="stat-rate">--%</span>
+          <span class="hs-label">Occupancy</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="btn-park-car">
+          <span>🚗</span> Park a Car
+        </button>
+        <button class="btn btn-secondary" id="btn-release">
+          <span>🔓</span> Release Slot
+        </button>
+        <button class="btn btn-ghost" id="btn-reset-lot">
+          <span>🔄</span> Reset Lot
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════ MAIN CONTENT ═══════════════════════ -->
+  <main class="main-content">
+
+    <!-- ── DASHBOARD SECTION ── -->
+    <section class="section" id="dashboard">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Parking Grid</h2>
+          <p class="section-sub">Visual map of all parking slots stored in a linear array</p>
+        </div>
+        <div class="grid-controls">
+          <label class="control-label">Grid Size:</label>
+          <select id="grid-size-select" class="select-input">
+            <option value="10">10 Slots</option>
+            <option value="20" selected>20 Slots</option>
+            <option value="30">30 Slots</option>
+            <option value="50">50 Slots</option>
+          </select>
+          <button class="btn btn-sm btn-accent" id="btn-random-fill">
+            🎲 Random Fill
+          </button>
+        </div>
+      </div>
+
+      <!-- Data structure display -->
+      <div class="ds-banner">
+        <div class="ds-tag">📦 Array / Linear List</div>
+        <div class="ds-arr-display" id="ds-array-display">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- Parking grid -->
+      <div class="parking-grid" id="parking-grid">
+        <!-- slots rendered by JS -->
+      </div>
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item"><span class="legend-dot free"></span> Available</div>
+        <div class="legend-item"><span class="legend-dot occupied"></span> Occupied</div>
+        <div class="legend-item"><span class="legend-dot reserved"></span> Reserved</div>
+        <div class="legend-item"><span class="legend-dot highlighted"></span> Highlighted</div>
+      </div>
+    </section>
+
+    <!-- ── ALGORITHMS SECTION ── -->
+    <section class="section" id="algorithms">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Algorithm Lab</h2>
+          <p class="section-sub">Search &amp; Sort algorithms with step-by-step visualization</p>
+        </div>
+      </div>
+
+      <div class="algo-grid">
+        <!-- SEARCH PANEL -->
+        <div class="algo-card" id="search-card">
+          <div class="algo-card-header">
+            <div class="algo-icon search-icon">🔍</div>
+            <div>
+              <h3 class="algo-card-title">Search Algorithms</h3>
+              <p class="algo-card-sub">Find slots by ID or status</p>
+            </div>
+          </div>
+
+          <div class="algo-controls">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Algorithm</label>
+                <select id="search-algo-select" class="select-input">
+                  <option value="linear">Linear Search — O(n)</option>
+                  <option value="binary">Binary Search — O(log n)</option>
+                  <option value="jump">Jump Search — O(√n)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Search Target</label>
+                <input id="search-target" type="number" class="text-input" placeholder="Slot ID (1–20)" min="1" max="50" value="7" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Search By</label>
+                <select id="search-by-select" class="select-input">
+                  <option value="id">Slot ID</option>
+                  <option value="free">First Free Slot</option>
+                  <option value="vehicle">Vehicle Plate</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Vehicle Plate (if applicable)</label>
+                <input id="search-plate" type="text" class="text-input" placeholder="e.g. MH12AB3456" />
+              </div>
+            </div>
+            <button class="btn btn-primary full-width" id="btn-run-search">
+              ▶ Run Search
+            </button>
+          </div>
+
+          <div class="algo-result" id="search-result">
+            <div class="result-placeholder">Run a search to see results here…</div>
+          </div>
+
+          <div class="complexity-table">
+            <div class="ct-header">Complexity Comparison</div>
+            <table>
+              <thead>
+                <tr><th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th></tr>
+              </thead>
+              <tbody>
+                <tr id="ct-linear"><td>Linear Search</td><td>O(1)</td><td>O(n/2)</td><td>O(n)</td><td>O(1)</td></tr>
+                <tr id="ct-binary"><td>Binary Search</td><td>O(1)</td><td>O(log n)</td><td>O(log n)</td><td>O(1)</td></tr>
+                <tr id="ct-jump"><td>Jump Search</td><td>O(1)</td><td>O(√n)</td><td>O(√n)</td><td>O(1)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SORT PANEL -->
+        <div class="algo-card" id="sort-card">
+          <div class="algo-card-header">
+            <div class="algo-icon sort-icon">⚙️</div>
+            <div>
+              <h3 class="algo-card-title">Sort Algorithms</h3>
+              <p class="algo-card-sub">Organize slots by ID, status, or vehicle plate</p>
+            </div>
+          </div>
+
+          <div class="algo-controls">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Algorithm</label>
+                <select id="sort-algo-select" class="select-input">
+                  <option value="bubble">Bubble Sort — O(n²)</option>
+                  <option value="selection">Selection Sort — O(n²)</option>
+                  <option value="insertion">Insertion Sort — O(n²)</option>
+                  <option value="quick">Quick Sort — O(n log n)</option>
+                  <option value="merge">Merge Sort — O(n log n)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Sort By</label>
+                <select id="sort-by-select" class="select-input">
+                  <option value="id">Slot ID</option>
+                  <option value="status">Status (Free First)</option>
+                  <option value="plate">Vehicle Plate</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Order</label>
+                <select id="sort-order-select" class="select-input">
+                  <option value="asc">Ascending ↑</option>
+                  <option value="desc">Descending ↓</option>
+                </select>
+              </div>
+              <div class="form-group" style="align-self:flex-end">
+                <button class="btn btn-primary full-width" id="btn-run-sort">
+                  ▶ Run Sort
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="algo-result" id="sort-result">
+            <div class="result-placeholder">Run a sort to see results here…</div>
+          </div>
+
+          <div class="complexity-table">
+            <div class="ct-header">Complexity Comparison</div>
+            <table>
+              <thead>
+                <tr><th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Bubble Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td></tr>
+                <tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td></tr>
+                <tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td></tr>
+                <tr><td>Quick Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td></tr>
+                <tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step-by-step trace log -->
+      <div class="trace-panel" id="trace-panel">
+        <div class="trace-header">
+          <span class="trace-title">⚡ Algorithm Trace Log</span>
+          <button class="btn btn-sm btn-ghost" id="btn-clear-trace">Clear</button>
+        </div>
+        <div class="trace-log" id="trace-log">
+          <span class="trace-empty">Algorithm trace will appear here after running a search or sort…</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ANALYTICS SECTION ── -->
+    <section class="section" id="analytics">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Performance Analytics</h2>
+          <p class="section-sub">Benchmark &amp; compare algorithm performance with real data</p>
+        </div>
+        <button class="btn btn-accent" id="btn-run-benchmark">
+          🚀 Run Benchmark
+        </button>
+      </div>
+
+      <div class="analytics-grid">
+        <!-- Benchmark Chart -->
+        <div class="analytics-card wide">
+          <h3 class="analytics-card-title">Operations vs. Comparisons</h3>
+          <div class="bar-chart-container" id="benchmark-chart">
+            <div class="chart-placeholder">Click "Run Benchmark" to generate performance data</div>
+          </div>
+        </div>
+
+        <!-- Metrics cards -->
+        <div class="analytics-card">
+          <h3 class="analytics-card-title">Last Search</h3>
+          <div class="metric-list" id="search-metrics">
+            <div class="metric-item"><span class="m-label">Algorithm</span><span class="m-val" id="m-search-algo">—</span></div>
+            <div class="metric-item"><span class="m-label">Comparisons</span><span class="m-val" id="m-search-comps">—</span></div>
+            <div class="metric-item"><span class="m-label">Steps</span><span class="m-val" id="m-search-steps">—</span></div>
+            <div class="metric-item"><span class="m-label">Found at index</span><span class="m-val" id="m-search-idx">—</span></div>
+            <div class="metric-item"><span class="m-label">Time (µs)</span><span class="m-val" id="m-search-time">—</span></div>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3 class="analytics-card-title">Last Sort</h3>
+          <div class="metric-list" id="sort-metrics">
+            <div class="metric-item"><span class="m-label">Algorithm</span><span class="m-val" id="m-sort-algo">—</span></div>
+            <div class="metric-item"><span class="m-label">Comparisons</span><span class="m-val" id="m-sort-comps">—</span></div>
+            <div class="metric-item"><span class="m-label">Swaps</span><span class="m-val" id="m-sort-swaps">—</span></div>
+            <div class="metric-item"><span class="m-label">Array Size</span><span class="m-val" id="m-sort-size">—</span></div>
+            <div class="metric-item"><span class="m-label">Time (µs)</span><span class="m-val" id="m-sort-time">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- History Table -->
+      <div class="history-panel">
+        <div class="hp-header">
+          <span>📋 Operation History</span>
+          <button class="btn btn-sm btn-ghost" id="btn-clear-history">Clear</button>
+        </div>
+        <div class="history-table-wrap">
+          <table class="history-table" id="history-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Operation</th><th>Algorithm</th><th>Target</th>
+                <th>Comparisons</th><th>Result</th><th>Time (µs)</th>
+              </tr>
+            </thead>
+            <tbody id="history-body">
+              <tr><td colspan="7" class="empty-row">No operations yet. Run a search or sort to populate history.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ABOUT SECTION ── -->
+    <section class="section" id="about">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Project Overview</h2>
+          <p class="section-sub">Micro Project — 03 | Smart Cities | CO1 &amp; CO5</p>
+        </div>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon">📦</div>
+          <h3>Data Structure</h3>
+          <p>Parking slots are stored in a <strong>linear array</strong>. Each element is a slot object with ID, status (free/occupied/reserved), vehicle plate, and timestamp.</p>
+          <code class="code-snippet">slots[i] = { id, status, plate, time }</code>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">🔍</div>
+          <h3>Searching (CO1)</h3>
+          <p>Three search algorithms traverse the array: <strong>Linear Search</strong> (sequential), <strong>Binary Search</strong> (sorted array, halving), and <strong>Jump Search</strong> (block + linear).</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">⚙️</div>
+          <h3>Sorting (CO5)</h3>
+          <p>Five sort algorithms implemented from scratch: <strong>Bubble, Selection, Insertion</strong> (O(n²)) and <strong>Quick Sort, Merge Sort</strong> (O(n log n)) with swap &amp; comparison counters.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">📊</div>
+          <h3>Performance Evaluation</h3>
+          <p>Every operation records comparisons, swaps, steps, and execution time in microseconds. Benchmark mode runs all algorithms on the same dataset for a fair comparison.</p>
+        </div>
+      </div>
+
+      <div class="co-table-wrap">
+        <h3 class="co-title">Course Outcomes Addressed</h3>
+        <table class="co-table">
+          <thead>
+            <tr><th>CO</th><th>Description</th><th>Implementation</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="co-badge">CO1</span></td>
+              <td>Apply linear data structures to solve real-world problems</td>
+              <td>Array-based slot storage; stack-like push/pop for queue management</td>
+            </tr>
+            <tr>
+              <td><span class="co-badge">CO5</span></td>
+              <td>Analyze and compare algorithm efficiency using Big-O notation</td>
+              <td>Benchmarking of 5 sort &amp; 3 search algorithms with live metrics</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="nav-icon">🅿</span>
+        <span>SmartPark</span>
+      </div>
+      <p>Micro Project 03 · Smart Cities · Linear Data Structures &amp; Algorithm Analysis</p>
+      <p class="footer-small">Designed to demonstrate CO1 &amp; CO5 — Array storage, searching and sorting algorithms.</p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════ MODALS ═══════════════════════ -->
+
+  <!-- Park Car Modal -->
+  <div class="modal-overlay" id="modal-park" role="dialog" aria-modal="true" aria-labelledby="modal-park-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-park-title">🚗 Park a Vehicle</h3>
+        <button class="modal-close" id="modal-park-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Slot Assignment</label>
+          <select id="park-slot-select" class="select-input">
+            <option value="auto">Auto-assign (First Free)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Vehicle Plate Number *</label>
+          <input id="park-plate-input" type="text" class="text-input" placeholder="e.g. MH12AB3456" maxlength="12" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Vehicle Type</label>
+          <div class="radio-group" id="vehicle-type-group">
+            <label class="radio-label"><input type="radio" name="vtype" value="🚗" checked /> 🚗 Car</label>
+            <label class="radio-label"><input type="radio" name="vtype" value="🏍️" /> 🏍️ Bike</label>
+            <label class="radio-label"><input type="radio" name="vtype" value="🚐" /> 🚐 Van</label>
+            <label class="radio-label"><input type="radio" name="vtype" value="🚛" /> 🚛 Truck</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="modal-park-cancel">Cancel</button>
+        <button class="btn btn-primary" id="modal-park-confirm">Confirm Parking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Release Slot Modal -->
+  <div class="modal-overlay" id="modal-release" role="dialog" aria-modal="true" aria-labelledby="modal-release-title">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-release-title">🔓 Release a Slot</h3>
+        <button class="modal-close" id="modal-release-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Select Slot to Release</label>
+          <select id="release-slot-select" class="select-input">
+            <option value="">— Choose an occupied slot —</option>
+          </select>
+        </div>
+        <div class="release-preview" id="release-preview" style="display:none;">
+          <div class="rp-row"><span class="rp-label">Slot ID</span><span id="rp-id">—</span></div>
+          <div class="rp-row"><span class="rp-label">Vehicle</span><span id="rp-plate">—</span></div>
+          <div class="rp-row"><span class="rp-label">Parked since</span><span id="rp-time">—</span></div>
+          <div class="rp-row"><span class="rp-label">Duration</span><span id="rp-duration">—</span></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="modal-release-cancel">Cancel</button>
+        <button class="btn btn-danger" id="modal-release-confirm">Release Slot</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slot Detail Modal -->
+  <div class="modal-overlay" id="modal-slot-detail" role="dialog" aria-modal="true" aria-labelledby="modal-detail-title">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-detail-title">Slot Details</h3>
+        <button class="modal-close" id="modal-detail-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="slot-detail-body">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="modal-detail-cancel">Close</button>
+        <button class="btn btn-primary" id="modal-detail-action">Park Here</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
