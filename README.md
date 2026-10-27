@@ -29,9 +29,7 @@ The application provides a visual parking dashboard where users can manage parki
 
 ![SmartPark Dashboard](smartpark-dashboard.png)
 
-*The SmartPark dashboard provides a visual interface for parking management, algorithm demonstrations, and performance analytics.*
-
-> To display the screenshot, save an actual screenshot of your running application as `smartpark-dashboard.png` in the same folder as this README and upload it to GitHub.
+*The SmartPark dashboard provides a visual interface for parking management.*
 
 ## Technology Stack
 
