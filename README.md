@@ -1,33 +1,49 @@
 # SmartPark — Intelligent Parking Slot Manager
 
-A web-based parking management application that demonstrates parking slot allocation, availability tracking, searching and sorting algorithms, and algorithm performance benchmarking.
+**A web-based smart parking management system demonstrating parking slot allocation, searching and sorting algorithms, and performance benchmarking.**
+
+[Live Demo](https://prasannatz.github.io/SmartPark/)
+
+---
 
 ## Overview
 
-SmartPark is a Smart City–focused project designed to make parking slot management easier to understand and operate. It combines an interactive parking dashboard with fundamental data structures and algorithms to demonstrate how parking information can be organized, searched, sorted, and analyzed.
+SmartPark is an interactive parking management application developed as a Smart City–focused project. It demonstrates how parking slot information can be managed using data structures, searching algorithms, sorting algorithms, and performance evaluation.
+
+The application provides a visual parking dashboard where users can manage parking slots, explore algorithm demonstrations, and examine parking statistics.
 
 ## Features
 
-- **Parking Slot Management:** View parking slots and their current states.
+- **Parking Slot Management:** View parking slots and their current status.
 - **Slot Allocation and Release:** Manage parking occupancy through interactive controls.
-- **Parking Status Visualization:** Distinguish between available, occupied, and reserved slots.
+- **Parking Status Visualization:** Identify available, occupied, and reserved slots.
 - **Random Fill:** Populate the parking layout with simulated parking data.
 - **Search Algorithm Lab:** Explore Linear Search, Binary Search, and Jump Search.
 - **Sorting Algorithm Lab:** Compare Bubble Sort, Selection Sort, Insertion Sort, Quick Sort, and Merge Sort.
-- **Performance Benchmarking:** Run algorithm comparisons and examine execution performance.
+- **Performance Benchmarking:** Compare algorithm execution performance.
 - **Analytics Dashboard:** View parking statistics and visual summaries.
-- **Complexity Reference:** Review the time complexity of the implemented algorithms.
-- **Reset Functionality:** Restore the parking layout for another demonstration.
+- **Algorithm Complexity Reference:** Understand the theoretical time complexity of the implemented algorithms.
+- **Reset Functionality:** Reset the parking layout for another demonstration.
+
+## Dashboard Preview
+
+![SmartPark Dashboard](smartpark-dashboard.png)
+
+*The SmartPark dashboard provides a visual interface for parking management, algorithm demonstrations, and performance analytics.*
+
+> To display the screenshot, save an actual screenshot of your running application as `smartpark-dashboard.png` in the same folder as this README and upload it to GitHub.
 
 ## Technology Stack
 
-- **HTML5** — Page structure
-- **CSS3** — Styling and responsive interface
-- **JavaScript** — Application logic, parking interactions, searching, sorting, and benchmarking
+| Technology | Purpose |
+|---|---|
+| HTML5 | Web page structure |
+| CSS3 | Styling and layout |
+| JavaScript | Parking management, algorithms, and application logic |
 
 ## Algorithms Demonstrated
 
-### Searching
+### Searching Algorithms
 
 | Algorithm | Typical Time Complexity |
 |---|---|
@@ -35,9 +51,9 @@ SmartPark is a Smart City–focused project designed to make parking slot manage
 | Binary Search | O(log n) |
 | Jump Search | O(√n) |
 
-Binary Search and Jump Search require data to be sorted according to the search implementation's requirements.
+Binary Search and Jump Search require appropriately sorted data for the search implementation.
 
-### Sorting
+### Sorting Algorithms
 
 | Algorithm | Average Time Complexity |
 |---|---|
@@ -47,14 +63,14 @@ Binary Search and Jump Search require data to be sorted according to the search 
 | Quick Sort | O(n log n) |
 | Merge Sort | O(n log n) |
 
-*These are typical theoretical complexities; actual performance depends on the input data and implementation.*
+*These are typical theoretical complexities. Actual execution performance depends on the implementation and input data.*
 
 ## Getting Started
 
 ### Prerequisites
 
 - A modern web browser
-- No package installation is required for the basic static website
+- Git, if you want to clone the repository
 
 ### Run Locally
 
@@ -64,29 +80,35 @@ Binary Search and Jump Search require data to be sorted according to the search 
    git clone https://github.com/prasannatz/SmartPark.git
    ```
 
-2. Open the project folder.
-3. Open `index.html` in your web browser.
+2. Open the downloaded `SmartPark` folder.
+3. Open `index.html` in your browser.
 
-Alternatively, open the folder in an editor such as Visual Studio Code or Antigravity and use a local development server if preferred.
-
+You can also open the folder in Antigravity or Visual Studio Code and use a local development server.
 
 ## Project Structure
 
 ```text
 SmartPark/
-├── index.html           # Main web page
-├── styles.css           # Application styling
-├── app.js               # Parking and algorithm logic
-├── project_overview.md  # Project overview and documentation
-├── test_jump_search.js  # Jump Search test script
-└── README.md            # Project documentation
+├── index.html
+├── styles.css
+├── app.js
+├── project_overview.md
+├── test_jump_search.js
+├── smartpark-dashboard.png
+└── README.md
 ```
+
+- `index.html` — Main web page.
+- `styles.css` — Application styling.
+- `app.js` — Parking management and algorithm logic.
+- `project_overview.md` — Project overview documentation.
+- `test_jump_search.js` — Jump Search test script.
+- `smartpark-dashboard.png` — Dashboard screenshot.
+- `README.md` — Project documentation.
 
 ## Testing
 
-The project includes `test_jump_search.js` for testing Jump Search functionality. Run tests according to the setup and execution instructions in the test file.
-
-Parking interactions and algorithm features can also be explored through the browser interface.
+The project includes a Jump Search test script. Additional testing can be performed through the browser interface by checking parking allocation, release, random fill, search, sorting, benchmarking, and reset functionality.
 
 ## Project Objective
 
@@ -94,17 +116,18 @@ The objective of SmartPark is to demonstrate how linear data structures, searchi
 
 ## Future Enhancements
 
-- Real-time parking occupancy using sensors
-- Database integration for persistent parking records
-- User authentication and role-based access
-- Reservation and booking management
-- Integration with live parking availability systems
+- Real-time occupancy updates using parking sensors.
+- Database integration for persistent parking records.
+- User authentication and access control.
+- Parking reservation and booking functionality.
+- Integration with live parking availability systems.
 
 ## License
 
-No license has been specified yet. Add a license if you decide to publish the project for reuse by others.
+No license has been specified yet.
 
 ---
 
 **SmartPark — Intelligent Parking Slot Manager**  
-*An educational project exploring smart parking management and algorithms.*
+*Exploring smart parking management through interactive web development and algorithms.*
+
