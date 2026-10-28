@@ -1,4 +1,4 @@
-# SmartPark — Intelligent Parking Slot Manager
+# SmartPark — Smart Parking Slot Manager
 
 **A web-based smart parking management system demonstrating parking slot allocation, searching and sorting algorithms, and performance benchmarking.**
 
@@ -126,6 +126,6 @@ No license has been specified yet.
 
 ---
 
-**SmartPark — Intelligent Parking Slot Manager**  
+**SmartPark — Smart Parking Slot Manager**  
 *Exploring smart parking management through interactive web development and algorithms.*
 
